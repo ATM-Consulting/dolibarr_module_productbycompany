@@ -25,6 +25,7 @@ if(empty($user->rights->productbycompany->read)) accessforbidden();
 $permissiondellink = $user->rights->productbycompany->write;	// Used by the include of actions_dellink.inc.php
 
 $langs->load('productbycompany@productbycompany');
+$newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
 
 $object = new ProductByCompany($db);
 
@@ -234,7 +235,7 @@ if ($action == 'create')
     print load_fiche_titre($langs->trans('NewProductByCompany'), '', 'title_generic.png');
 
     print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
-    print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+    print '<input type="hidden" name="token" value="'.$newToken.'">';
     print '<input type="hidden" name="action" value="add">';
     print '<input type="hidden" name="origin_id" value="'.$origin_id.'">';
     print '<input type="hidden" name="type" value="'.$type.'">';
@@ -276,7 +277,7 @@ else
         if (!empty($origin_object->id) && $action === 'edit')
         {
             print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
-            print '<input type="hidden" name="token" value="'.$_SESSION['newtoken'].'">';
+            print '<input type="hidden" name="token" value="'.$newToken.'">';
             print '<input type="hidden" name="action" value="update">';
             print '<input type="hidden" name="backtopage" value="'.$backtopage.'">';
             print '<input type="hidden" name="origin_id" value="'.$origin_object->id.'">';

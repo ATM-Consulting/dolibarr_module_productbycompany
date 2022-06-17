@@ -134,6 +134,12 @@ class InterfaceProductByCompanytrigger
         // Put here code you want to execute when a Dolibarr business events occurs.
         // Data and type of action are stored into $object and $action
         // Users
+
+
+		#COMPATIBILITÉ V16
+		$update = '_MODIFY';
+		if (intval(DOL_VERSION) < 16) $update = '_UPDATE';
+
         if ($action == 'USER_LOGIN') {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
@@ -272,7 +278,7 @@ class InterfaceProductByCompanytrigger
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
             return $this->createCustomRef($object);
-        } elseif ($action == 'LINEORDER_UPDATE') {
+        } elseif ($action == 'LINEORDER'.$update) {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -306,7 +312,7 @@ class InterfaceProductByCompanytrigger
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
             return $this->createCustomRef($object);
-        } elseif ($action == 'LINEORDER_SUPPLIER_UPDATE') {
+        } elseif ($action == 'LINEORDER_SUPPLIER'.$update) {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -360,7 +366,7 @@ class InterfaceProductByCompanytrigger
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
 			return $this->createCustomRef($object);
-        } elseif ($action == 'LINEPROPAL_UPDATE') {
+        } elseif ($action == 'LINEPROPAL'.$update) {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -437,7 +443,7 @@ class InterfaceProductByCompanytrigger
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
 			return $this->createCustomRef($object);
-        } elseif ($action == 'LINEBILL_UPDATE') {
+        } elseif ($action == 'LINEBILL'.$update) {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -622,7 +628,7 @@ class InterfaceProductByCompanytrigger
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
 			return $this->createCustomRef($object);
-		} elseif ($action == 'LINEBILL_SUPPLIER_UPDATE') {
+		} elseif ($action == 'LINEBILL_SUPPLIER'.$update) {
 			dol_syslog(
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
@@ -639,7 +645,7 @@ class InterfaceProductByCompanytrigger
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
 			return $this->createCustomRef($object);
-		} elseif ($action == 'LINESUPPLIER_PROPOSAL_UPDATE') {
+		} elseif ($action == 'LINESUPPLIER_PROPOSAL'.$update) {
 			dol_syslog(
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
