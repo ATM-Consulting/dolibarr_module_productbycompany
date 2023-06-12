@@ -149,7 +149,7 @@ $sql.=$hookmanager->resPrint;
 
 $sql.= ' FROM '.MAIN_DB_PREFIX.'product_by_company t ';
 
-if (!empty($object->isextrafieldmanaged))
+if (!empty($productbycompany->isextrafieldmanaged))
 {
     $sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_by_company_extrafields et ON (et.fk_object = t.rowid)';
 }
@@ -165,7 +165,6 @@ else $sql.= ' AND fk_soc = '.$object->id;
 $parameters=array('sql' => $sql);
 $reshook=$hookmanager->executeHooks('printFieldListWhere', $parameters, $object);    // Note that $action and $object may have been modified by hook
 $sql.=$hookmanager->resPrint;
-
 
 dol_fiche_head($head, 'productbycompanytab', $title, -1, $picto);
 

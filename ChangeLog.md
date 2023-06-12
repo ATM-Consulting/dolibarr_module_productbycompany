@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## Version 1.1
 
+- FIX : Onglet liste sql extrafields *12/06/2023* - 1.1.4
 - FIX : Transfert de données entre objet *15/02/2023* - 1.1.3
 - FIX : Change editor name : ATM-Consulting -> ATM Consulting *09/08/2022* - 1.1.2
 - FIX : Remove useless boxe *30/08/2021* - 1.1.1
