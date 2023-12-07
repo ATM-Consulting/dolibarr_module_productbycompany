@@ -21,8 +21,8 @@ require_once DOL_DOCUMENT_ROOT.'/core/class/html.form.class.php';
 dol_include_once('productbycompany/class/productbycompany.class.php');
 dol_include_once('productbycompany/lib/productbycompany.lib.php');
 
-if(empty($user->rights->productbycompany->read)) accessforbidden();
-$permissiondellink = $user->rights->productbycompany->write;	// Used by the include of actions_dellink.inc.php
+if(!$user->hasRight('productbycompany', 'read')) accessforbidden();
+$permissiondellink = $user->hasRight('productbycompany', 'write');	// Used by the include of actions_dellink.inc.php
 
 $langs->load('productbycompany@productbycompany');
 $newToken = function_exists('newToken') ? newToken() : $_SESSION['newtoken'];
@@ -394,7 +394,7 @@ else
 
             if (empty($reshook))
             {
-                if (!empty($user->rights->productbycompany->write))
+                if ($user->hasRight('productbycompany', 'write'))
                 {
                     // Modify
                     print '<div class="inline-block divButAction"><a class="butAction" href="'.$_SERVER["PHP_SELF"].'?origin_id='.$origin_object->id.'&type='.$type.'&id='.$object->id.'&action=edit">'.$langs->trans("ProductByCompanyModify").'</a></div>'."\n";

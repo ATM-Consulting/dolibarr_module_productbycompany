@@ -27,7 +27,7 @@
  */
 function productbycompanyAdminPrepareHead()
 {
-    global $langs, $conf;
+    global $langs, $conf, $object;
 
     $langs->load('productbycompany@productbycompany');
 
@@ -97,42 +97,42 @@ function getFormConfirmProductByCompany($form, $object, $action)
 
     $formconfirm = '';
 
-    if ($action === 'valid' && !empty($user->rights->productbycompany->write))
+    if ($action === 'valid' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmValidateProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmValidateProductByCompanyTitle'), $body, 'confirm_validate', '', 0, 1);
     }
-    elseif ($action === 'accept' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'accept' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmAcceptProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmAcceptProductByCompanyTitle'), $body, 'confirm_accept', '', 0, 1);
     }
-    elseif ($action === 'refuse' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'refuse' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmRefuseProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmRefuseProductByCompanyTitle'), $body, 'confirm_refuse', '', 0, 1);
     }
-    elseif ($action === 'reopen' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'reopen' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmReopenProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmReopenProductByCompanyTitle'), $body, 'confirm_refuse', '', 0, 1);
     }
-    elseif ($action === 'delete' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'delete' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmDeleteProductByCompanyBody');
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?origin_id='.$object->origin_id.'&type='.$object->origin_type.'&id=' . $object->id, $langs->trans('ConfirmDeleteProductByCompanyTitle'), $body, 'confirm_delete', '', 0, 1);
     }
-    elseif ($action === 'delete_ref' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'delete_ref' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmDeleteProductByCompanyBody');
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id='.$object->origin_id.'&type='.$object->origin_type.'&ref_id=' . $object->id, $langs->trans('ConfirmDeleteProductByCompanyTitle'), $body, 'confirm_delete', '', 0, 1);
     }
-    elseif ($action === 'clone' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'clone' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmCloneProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmCloneProductByCompanyTitle'), $body, 'confirm_clone', '', 0, 1);
     }
-    elseif ($action === 'cancel' && !empty($user->rights->productbycompany->write))
+    elseif ($action === 'cancel' && $user->hasRight('productbycompany', 'write'))
     {
         $body = $langs->trans('ConfirmCancelProductByCompanyBody', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ConfirmCancelProductByCompanyTitle'), $body, 'confirm_cancel', '', 0, 1);

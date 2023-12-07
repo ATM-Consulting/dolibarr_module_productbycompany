@@ -248,7 +248,11 @@ class ProductByCompany extends SeedObject
 		else
 		{
 			$obj = $this->db->fetch_object($res);
-			return (int) $obj->rowid;
+			if ($obj !== null) {
+				return (int) $obj->rowid;
+			} else {
+				return 0;
+			}
 		}
 	}
 
@@ -384,7 +388,11 @@ class ProductByCompanyDet extends ProductByCompany
 		else
 		{
 			$obj = $this->db->fetch_object($res);
-			return (int) $obj->rowid;
+			if ($obj !== null) {
+				return (int) $obj->rowid;
+			} else {
+				return 0;
+			}
 		}
 	}
 
