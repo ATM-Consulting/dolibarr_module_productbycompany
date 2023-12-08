@@ -21,11 +21,12 @@
  * \brief   This file is an example hook overload class file
  *          Put some comments here
  */
+require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
 
 /**
  * Class ActionsProductByCompany
  */
-class ActionsProductByCompany
+class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookActions
 {
     /**
      * @var DoliDb		Database handler (result of a new DoliDB)
@@ -78,13 +79,13 @@ class ActionsProductByCompany
 		$TContext = explode(':', $parameters['context']);
 
 		if (
-			($conf->global->PBC_USE_CUSTOM_REF_CUSTOMER &&
+			(getDolGlobalString('PBC_USE_CUSTOM_REF_CUSTOMER')  &&
 				(in_array('propalcard', $TContext)
 				|| in_array('invoicecard', $TContext)
 				|| in_array('ordercard', $TContext))
 			)
 			||
-			($conf->global->PBC_USE_CUSTOM_REF_SUPPLIER &&
+			(getDolGlobalString('PBC_USE_CUSTOM_REF_SUPPLIER')  &&
 				(in_array('supplier_proposalcard', $TContext)
 				|| in_array('invoicesuppliercard', $TContext)
 				|| in_array('ordersuppliercard', $TContext))
@@ -158,7 +159,7 @@ class ActionsProductByCompany
 		$TContext = explode(':', $parameters['context']);
 
 		if (
-			$conf->global->PBC_USE_CUSTOM_REF_CUSTOMER &&
+			getDolGlobalString('PBC_USE_CUSTOM_REF_CUSTOMER') &&
 			(
 				in_array('propalcard', $TContext)
 				|| in_array('invoicecard', $TContext)
@@ -350,7 +351,7 @@ class ActionsProductByCompany
 		$TContext = explode(':', $parameters['context']);
 
 		if (
-			$conf->global->PBC_USE_CUSTOM_REF_SUPPLIER &&
+			getDolGlobalString('PBC_USE_CUSTOM_REF_SUPPLIER') &&
 			(
 				in_array('supplier_proposalcard', $TContext)
 				|| in_array('invoicesuppliercard', $TContext)
@@ -425,7 +426,7 @@ class ActionsProductByCompany
 		if (
 			in_array('pdfgeneration', $TContext)
 			&& (
-				($conf->global->PBC_USE_CUSTOM_REF_CUSTOMER &&
+				(getDolGlobalString('PBC_USE_CUSTOM_REF_CUSTOMER')  &&
 					(
 						$object->element == 'propal'
 						|| $object->element == 'commande'
@@ -433,7 +434,7 @@ class ActionsProductByCompany
 					)
 				)
 				||
-				($conf->global->PBC_USE_CUSTOM_REF_SUPPLIER &&
+				(getDolGlobalString('PBC_USE_CUSTOM_REF_SUPPLIER')  &&
 					(
 						$object->element == 'supplier_proposal'
 						|| $object->element == 'order_supplier'

@@ -59,8 +59,8 @@ function getCustomRefCreateFields($id_prod, $fk_soc, $isPrice = false)
 
 	$out = '<br>';
 	// créer le selectarray avec rien/custom/la ref existante
-	if ($exists > 0 && empty($conf->global->PBC_DONT_PRESELECT_CUSTOM_REF)) $checked = 'checked';
-	$out.= '<input type="checkbox" name="customRefSelect" id="customRefSelect" style="display: none;"'.$checked.'>';
+	if ($exists > 0 && !getDolGlobalString('PBC_DONT_PRESELECT_CUSTOM_REF')) $checked = 'checked';
+	$out.= '<input type="checkbox" name="customRefSelect" id="customRefSelect" style="display: none;"'.($checked ?? '').'>';
 
 	if ($exists > 0) $out.= "<input type='hidden' name='customRowid' value='".$customRef->id."'>";
 
@@ -76,7 +76,7 @@ function getCustomRefCreateFields($id_prod, $fk_soc, $isPrice = false)
 
 	$out.= '<p><label for="majCustomRef" id="customCB"><input type="checkbox" name="majCustomRef" id="majCustomRef" '.(empty($exists) ? 'checked' : '').'> '.$langs->trans($cb_label).'</label></p>';
 
-	if (!empty($exists) && empty($conf->global->PBC_DONT_PRESELECT_CUSTOM_REF))
+	if (!empty($exists) && !getDolGlobalString('PBC_DONT_PRESELECT_CUSTOM_REF'))
 	{
 		$out.='<script type="text/javascript">
 			$("#js_fieldset").show();

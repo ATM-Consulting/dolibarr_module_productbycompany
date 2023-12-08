@@ -21,7 +21,7 @@ dol_include_once('productbycompany/lib/productbycompany.lib.php');
 require_once DOL_DOCUMENT_ROOT.'/core/lib/functions.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.form.class.php';
 
-if(empty($user->rights->productbycompany->read)) accessforbidden();
+if(!$user->hasRight('productbycompany', 'read')) accessforbidden();
 
 $langs->load('abricot@abricot');
 $langs->load('productbycompany@productbycompany');
@@ -105,11 +105,11 @@ if (empty($reshook))
 
 	// Mass actions
 	$objectclass='ProductByCompany';
-	if ((string) $search_type == '1') { $objectlabel='Services'; }
-	if ((string) $search_type == '0') { $objectlabel='Products'; }
+	if ((string) $object->type == '1') { $objectlabel='Services'; }
+	if ((string) $object->type == '0') { $objectlabel='Products'; }
 
-	$permtoread = $user->rights->productbycompany->read;
-	$permtodelete = $user->rights->productbycompany->delete;
+	$permtoread = $user->hasRight('productbycompany', 'read');
+	$permtodelete = $user->hasRight('productbycompany', 'delete');
 	$uploaddir = $conf->productbycompany->dir_output;
 	include DOL_DOCUMENT_ROOT.'/core/actions_massactions.inc.php';
 
@@ -180,7 +180,7 @@ dol_banner_tab($object, $paramid, '', ($user->socid?0:1), $fieldid, 'ref', '', '
 print '<div class="underbanner clearboth"></div>';
 // PRINT LIST
 $newcardbutton = '';
-if ($user->rights->productbycompany->write)
+if ($user->hasRight('productbycompany', 'write'))
 {
     $backtopage=dol_buildpath('productbycompany/list.php', 1).'?origin_id='.$object->id.'&type='.$type;
     $addproductbycomapny = $langs->trans("AddNewProductByCompany");
@@ -195,7 +195,7 @@ $formcore = new TFormCore($_SERVER['PHP_SELF'], 'form_list_productbycompany', 'G
 print $formcore->hidden("id", $id);
 print $formcore->hidden('type', $type);
 
-$nbLine = !empty($user->conf->MAIN_SIZE_LISTE_LIMIT) ? $user->conf->MAIN_SIZE_LISTE_LIMIT : $conf->global->MAIN_SIZE_LISTE_LIMIT;
+$nbLine = !empty($user->conf->MAIN_SIZE_LISTE_LIMIT) ? $user->conf->MAIN_SIZE_LISTE_LIMIT : getDolGlobalString('MAIN_SIZE_LISTE_LIMIT') ;
 
 $TEval = array(
 	'fk_product' => 'getOriginLink("'.$type.'", @val@)'

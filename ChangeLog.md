@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
   In case I create a custom reference in an offer (with or without the check to create it in the product) and then I transfer the offer to an order, the custom reference is lost.  
   Same happens from order to invoice.  
   Same for supplier and customer documents *
+- - NEW : Dolibarr compatibility V19 - *07/12/2023* - 1.3.0
+    Changed Dolibarr compatibility range to 15 min - 19 max  
+    Change PHP compatibility range to 7.0 min - 8.2 max
 
 
 ## Version 1.1
