@@ -1,7 +1,59 @@
-Module104963Name = Réf produit par client/tiers
-Module104963Desc = Permet pour chaque clients de modifier spécifiquement la référence et le libéllé d'un produit sur les documents PDF commandes/propositions/factures
+Module104963Name =Product ref by third party
+Module104963Desc =Module used to modify the product reference and label of a document line (orders / proposals / invoices)
 
-ATMAbout = This module has been developed by <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>You can find the documentation on our <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>For any question or feedback, contact us on <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>For any commercial question, contact us on <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> or at +33 9 77 19 50 70<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
+ATMAbout =This module has been developed by <a href="http://www.atm-consulting.fr" target="_blank">ATM Consulting</a><br>You can find the documentation on our <a href="http://wiki.atm-consulting.fr/index.php/Accueil" target="_blank">wiki</a><br><br>For any question or feedback, contact us on <a href="mailto:support@atm-consulting.fr">support@atm-consulting.fr</a><br><br>For any commercial question, contact us on <a href="mailto:contact@atm-consulting.fr">contact@atm-consulting.fr</a> or at +33 9 77 19 50 70<br><br>Find our other modules on <a href="http://www.dolistore.com/search.php?orderby=position&orderway=desc&search_query=atm&submit_search=Rechercher" target="_blank">Dolistore</a>
 
-ProductByCompanySetup = Réf produit par client/tiers module setup
-ProductByCompanyAbout = A-propos du module : Réf produit par client/tiers
+ProductByCompanySetup =Configuration of the "Product reference by customer/third party" module
+ProductByCompanyAbout =About the Product Ref by Customer/Third Party module
+
+ProductByCompany=ProductByCompany
+AbricotNeedUpdate=Apricot module has to be updated
+
+# SETUP
+ParamLabel=Parameter name
+ParamDesc=A description if required
+ParamHelp=Help content
+PBC_DONT_PRESELECT_CUSTOM_REF=Do not pre-select the custom reference by default
+PBC_USE_CUSTOM_REF_CUSTOMER=Use personalized references on customer documents
+PBC_USE_CUSTOM_REF_SUPPLIER=Use personalized references on supplier documents
+
+# TAB
+TabProductByCompanyFromProduct=Ref./linked by customer
+TabProductByCompanyFromCompany=Ref./labeled by product
+
+# LIST
+ProductByCompanyListFromProduct=List Ref./linked by third party
+ProductByCompanyListFromCompany=Ref./label list by product
+AddNewProductByCompany=Create a custom ref.
+NoProductByCompany=(empty)
+
+# CARD
+NewProductByCompany=Creation Ref./customized label
+ProductByCompanyCard=Customized Ref./label sheet
+
+ProductByCompanyModify=Edit
+ProductByCompanyClone=Clone
+ProductByCompanyValid=Confirm
+ProductByCompanyAccept=Accept
+ProductByCompanyRefuse=Refused
+ProductByCompanyReopen=Reopen
+ProductByCompanyCancel=Cancel
+ProductByCompanyDelete=Delete
+
+ConfirmValidateProductByCompanyTitle=Activation confirmation
+ConfirmValidateProductByCompanyBody=Do you really want to activate this customized reference %s ?
+
+ConfirmDeleteProductByCompanyTitle=Confirmation of deletion
+ConfirmDeleteProductByCompanyBody=Do you really want to delete this custom reference %s ?
+
+DateCre=Creation date
+RecordAlreadyExists=A customized reference already exists for this product for this third party
+RefIsRequired=The "Ref" field is required
+CustomRef=Customized product
+CreateCustomRef=Create customized reference
+majCustomRef=Update existing reference
+RefIsAMandatoryField=The Ref field cannot be empty
+Customize=Customize
+
+SearchForCustomerCustomRef =Customer product code
+
