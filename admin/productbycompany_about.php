@@ -48,11 +48,11 @@ llxHeader('', $langs->trans($page_name));
 // Subheader
 $linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
     . $langs->trans('BackToModuleList') . '</a>';
-print load_fiche_titre($langs->trans($page_name), $linkback);
+print load_fiche_titre($langs->trans($page_name), $linkback, 'tools');
 
 // Configuration header
 $head = productbycompanyAdminPrepareHead();
-dol_fiche_head(
+print dol_get_fiche_head(
     $head,
     'about',
     $langs->trans('Module104963Name'),
@@ -60,15 +60,12 @@ dol_fiche_head(
     'modulelogo.svg@productbycompany'
 );
 
-// About page goes here
-print '<div style="float: left;"><img src="../img/Dolibarr_Preferred_Partner_logo.png" /></div>';
-print '<div>'.$langs->trans('ATMAbout').'</div>';
+require_once __DIR__ . '/../class/techatm.class.php';
+$techATM = new \productbycompany\TechATM($db);
 
-dol_fiche_end();
+require_once __DIR__ . '/../core/modules/modProductByCompany.class.php';
+$moduleDescriptor = new modProductByCompany($db);
 
-print '<br><div class="center">';
-print '<a href="http://www.atm-consulting.fr" target="_blank"><img src="../img/ATM_logo.jpg" /></a>';
-print '</div>';
-
+print $techATM->getAboutPage($moduleDescriptor);
 llxFooter();
 $db->close();
