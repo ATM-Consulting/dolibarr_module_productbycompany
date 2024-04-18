@@ -27,5 +27,6 @@ All notable changes to this project will be documented in this file.
 
 ## Release 1.0
 
+- FIX : Warning => object productbycompany doesn't manage extrafields - *18/04/2024* - 1.0.3
 - FIX : Compatibility V16 - *15/06/2022* - 1.0.2
 - NEW : Initial Version *02/07/2021* - 1.0
