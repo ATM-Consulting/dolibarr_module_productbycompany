@@ -130,7 +130,7 @@ llxHeader('', $title, '', '');
 
 // TODO ajouter les champs de son objet que l'on souhaite afficher
 $keys = array_keys($productbycompany->fields);
-$fieldList = 't.'.implode(', t.', $keys);
+$fieldList = 'te.'.implode(', te.', $keys);
 if (!empty($productbycompany->isextrafieldmanaged))
 {
     $keys = array_keys($extralabels);
@@ -138,7 +138,7 @@ if (!empty($productbycompany->isextrafieldmanaged))
 		$fieldList .= ', et.' . implode(', et.', $keys);
 	}
 }
-$fieldList.= ', t.rowid AS fk_productbycompany';
+$fieldList.= ', te.rowid AS fk_productbycompany';
 
 $sql = 'SELECT '.$fieldList;
 
@@ -147,11 +147,11 @@ $parameters=array('sql' => $sql, 'productbycompany' => $productbycompany);
 $reshook=$hookmanager->executeHooks('printFieldListSelect', $parameters, $object);    // Note that $action and $object may have been modified by hook
 $sql.=$hookmanager->resPrint;
 
-$sql.= ' FROM '.MAIN_DB_PREFIX.'product_by_company t ';
+$sql.= ' FROM '.MAIN_DB_PREFIX.'product_by_company te ';
 
 if (!empty($productbycompany->isextrafieldmanaged))
 {
-    $sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_by_company_extrafields et ON (et.fk_object = t.rowid)';
+    $sql.= ' LEFT JOIN '.MAIN_DB_PREFIX.'product_by_company_extrafields et ON (et.fk_object = te.rowid)';
 }
 
 $sql.= ' WHERE 1=1';

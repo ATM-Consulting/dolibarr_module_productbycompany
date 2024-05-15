@@ -60,7 +60,7 @@ class modProductByCompany extends DolibarrModules
 		$this->description = "Permet pour chaque clients de modifier spécifiquement la référence et le libéllé d'un produit sur les documents PDF commandes/propositions/factures";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
 
-		$this->version = '1.3.0';
+		$this->version = '1.3.1';
 
 		// Url to the file with your last numberversion of this module
 		require_once __DIR__ . '/../../class/techatm.class.php';
