@@ -166,7 +166,6 @@ $parameters=array('sql' => $sql);
 $reshook=$hookmanager->executeHooks('printFieldListWhere', $parameters, $object);    // Note that $action and $object may have been modified by hook
 $sql.=$hookmanager->resPrint;
 
-var_dump($sql);
 dol_fiche_head($head, 'productbycompanytab', $title, -1, $picto);
 
 $form = new Form($db);
