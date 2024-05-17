@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 
 ## Release 1.3
 
-- FIX : Change alias t. -> te. SQL in list productbycompany  *15/05/20247* - 1.3.1
+- FIX : DA024855 Change req SQL "Liste Réf./libellé par tiers"  *15/05/20247* - 1.3.1
 - NEW : Add search field for custom ref in customer documents *14/09/2022* - 1.3.0
 - FIX : Copy reference from source object to new object *26/09/2022* - 1.2.1
   In case I create a custom reference in an offer (with or without the check to create it in the product) and then I transfer the offer to an order, the custom reference is lost.  
