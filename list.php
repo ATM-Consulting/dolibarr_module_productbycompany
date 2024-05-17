@@ -140,14 +140,14 @@ if (!empty($productbycompany->isextrafieldmanaged))
 }
 $fieldList.= ', t.rowid AS fk_productbycompany';
 
-$sql = 'SELECT '.$fieldList;
+$sql = 'SELECT DISTINCT '.$fieldList;
 
 // Add fields from hooks
 $parameters=array('sql' => $sql, 'productbycompany' => $productbycompany);
 $reshook=$hookmanager->executeHooks('printFieldListSelect', $parameters, $object);    // Note that $action and $object may have been modified by hook
 $sql.=$hookmanager->resPrint;
 
-$sql.= ' FROM '.MAIN_DB_PREFIX.'product_by_company t ';
+$sql.= ' FROM '.MAIN_DB_PREFIX.'product_by_company t INNER JOIN '.MAIN_DB_PREFIX.'product AS te';
 
 if (!empty($productbycompany->isextrafieldmanaged))
 {
