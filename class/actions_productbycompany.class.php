@@ -22,6 +22,7 @@
  *          Put some comments here
  */
 require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/functions.lib.php';
 
 /**
  * Class ActionsProductByCompany
@@ -69,6 +70,67 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 	public function doActions($parameters, &$object, &$action, $hookmanager)
 	{
 
+	}
+
+    public function printFieldListWhere($parameters, &$object, &$action, $hookmanager)
+    {
+        if ($parameters['currentcontext'] == 'productservicelist') {
+            $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
+            $hookmanager->resPrint = " AND EXISTS (SELECT 1 FROM ".MAIN_DB_PREFIX."product_by_company AS pbc WHERE pbc.fk_product = p.rowid AND pbc.ref LIKE CONCAT('%', '".$search_companyproductreference."', '%')) ";
+        }
+        return 0;
+    }
+    
+    public function printFieldListOption($parameters, &$object, &$action, $hookmanager)
+	{
+        if ($parameters['currentcontext'] == 'productservicelist') {
+            $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
+
+            print '<td class="liste_titre left">';
+            print '<input class="flat" type="text" name="search_companyproductreference" size="12" value="'.dol_escape_htmltag($search_companyproductreference).'">';
+            print '</td>';
+        }
+        return 0;
+	}
+
+    public function printFieldListTitle($parameters, &$object, &$action, $hookmanager)
+	{
+        if ($parameters['currentcontext'] == 'productservicelist') {
+            global $langs;
+
+            $langs->load('productbycompany@productbycompany');
+
+            $param = $parameters["param"];
+            $sortfield = $parameters["sortfield"];
+            $sortorder = $parameters["sortorder"];
+            
+            print_liste_field_titre($langs->trans("ProductRefByCompany"), $_SERVER["PHP_SELF"], "", "", $param, '', $sortfield, $sortorder, 'center nowrap ');
+        }
+        return 0;
+	}
+
+    public function printFieldListValue($parameters, &$object, &$action, $hookmanager)
+	{
+        if ($parameters['currentcontext'] == 'productservicelist') {
+            $product = $parameters["obj"];
+
+            print '<td class="center nowraponall">';
+
+            $sql = "SELECT ref FROM ".MAIN_DB_PREFIX."product_by_company WHERE fk_product = '".$product->rowid."'";
+            $resql = $this->db->query($sql);
+            if ($resql) {
+                $num = $this->db->num_rows($resql);
+                for ($i = 0; $i < $num; $i++) {
+                    $dbObject = $this->db->fetch_object($resql);
+                    if (!empty($dbObject->ref)) {
+                        print $dbObject->ref."<br />";
+                    }
+                }
+            }
+
+            print '</td>';
+        }
+        return 0;
 	}
 
 	public function formEditProductOptions($parameters, &$object, &$action, $hookmanager)

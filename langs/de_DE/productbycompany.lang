@@ -56,3 +56,6 @@ RefIsAMandatoryField=Das Feld Referenz darf nicht leer sein
 Customize=Anpassen
 
 SearchForCustomerCustomRef = Produktreferenz des Kunden
+
+# product list
+ProductRefByCompany = Produktreferenz Geschäftspartner
