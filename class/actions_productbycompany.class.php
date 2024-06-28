@@ -74,7 +74,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListWhere($parameters, &$object, &$action, $hookmanager)
     {
-        if ($parameters['currentcontext'] == 'productservicelist') {
+        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
             $hookmanager->resPrint = " AND EXISTS (SELECT 1 FROM ".MAIN_DB_PREFIX."product_by_company AS pbc WHERE pbc.fk_product = p.rowid AND pbc.ref LIKE CONCAT('%', '".$search_companyproductreference."', '%')) ";
         }
@@ -83,7 +83,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
     
     public function printFieldListOption($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist') {
+        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
 
             print '<td class="liste_titre left">';
@@ -95,7 +95,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListTitle($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist') {
+        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             global $langs;
 
             $langs->load('productbycompany@productbycompany');
@@ -111,7 +111,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListValue($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist') {
+        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             $product = $parameters["obj"];
 
             print '<td class="center nowraponall">';

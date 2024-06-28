@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-
+- NEW : Add references in product list and add corresponding search functionality *28/06/2024*
 
 ## Release 1.3
 

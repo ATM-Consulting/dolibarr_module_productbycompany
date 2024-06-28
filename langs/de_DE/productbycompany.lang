@@ -16,6 +16,7 @@ ParamHelp=Hilfe Text
 PBC_DONT_PRESELECT_CUSTOM_REF=Benutzerdefinierte Referenz nicht standardmäßig vorauswählen
 PBC_USE_CUSTOM_REF_CUSTOMER=Benutzerdefinierte Referenzen auf Kundendokumenten verwenden
 PBC_USE_CUSTOM_REF_SUPPLIER=Benutzerdefinierte Referenzen auf Lieferantendokumenten verwenden
+PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST=Benutzerdefinierte Referenzen auf Produktlisten Seite anzeigen und suchen
 
 # TAB
 TabProductByCompanyFromProduct=Referenz/Bezeichnung pro Kunde
