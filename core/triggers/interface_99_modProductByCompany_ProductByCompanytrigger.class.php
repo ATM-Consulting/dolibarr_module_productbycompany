@@ -139,7 +139,7 @@ class InterfaceProductByCompanytrigger
 	$update = '_MODIFY';
 	if (intval(DOL_VERSION) < 16) $update = '_UPDATE';
 
-        if ($action == 'LINEORDER_INSERT') {
+        if ($action == 'LINEORDER_INSERT' || $action == 'LINEORDER_CREATE') {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -170,7 +170,7 @@ class InterfaceProductByCompanytrigger
             );
             return $this->deleteCustomRef($object);
         }
-		elseif ($action == 'LINEPROPAL_INSERT') {
+		elseif ($action == 'LINEPROPAL_INSERT' || $action == 'LINEPROPAL_CREATE') {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -186,7 +186,7 @@ class InterfaceProductByCompanytrigger
             );
 			return $this->deleteCustomRef($object);
         }
-		elseif ($action == 'LINEBILL_INSERT') {
+		elseif ($action == 'LINEBILL_INSERT' || $action == 'LINEBILL_CREATE') {
             dol_syslog(
                 "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
             );
@@ -218,7 +218,7 @@ class InterfaceProductByCompanytrigger
 			);
 			return $this->deleteCustomRef($object);
 		}
-        elseif ($action == 'LINESUPPLIER_PROPOSAL_INSERT') {
+        elseif ($action == 'LINESUPPLIER_PROPOSAL_INSERT' || $action == 'LINESUPPLIER_PROPOSAL_CREATE') {
 			dol_syslog(
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
@@ -338,7 +338,6 @@ class InterfaceProductByCompanytrigger
 			,'fk_origin' 	=> $object->id
 			,'origin_type' 	=> $object->element
 		);
-
 		if (empty($selected))
 		{
 			if ($mode == "edit")
@@ -364,6 +363,7 @@ class InterfaceProductByCompanytrigger
 			$pbc_det->id = $pbc_det->alreadyExists();
 			$pbc_det->save($user);
 		}
+
 /*		var_dump(
 			array(
 				'selected' => $selected,
