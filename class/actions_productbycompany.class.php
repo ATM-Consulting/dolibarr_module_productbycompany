@@ -34,7 +34,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
     public $db;
 
 	/**
-	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
+	 * @var array Hook results. Propagated to $this->results for later reuse
 	 */
 	public $results = array();
 
@@ -469,5 +469,21 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 			}
 		}
 
+	}
+
+	/**
+	 * When thirdparties are merged, we need to replace the fk_soc of webhost objects
+	 *
+	 * @param   array()         $parameters     Hook metadatas (context, etc...)
+	 * @param   CommonObject    $object        The object to process (an invoice if you are in invoice module, a propale in propale's module, etc...)
+	 * @param   string          $action        Current action (if set). Generally create or edit or null
+	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
+	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
+	 */
+	public function replaceThirdparty($parameters, &$object, &$action, $hookmanager)
+	{
+		$tables = ['advkanban'];
+
+		return CommonObject::commonReplaceThirdparty($this->db, $parameters['soc_origin'], $parameters['soc_dest'], $tables);
 	}
 }

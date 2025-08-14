@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 
 ## Release 1.3
-
+- FIX : Compat v22 - *14/08/2025* - 1.3.3  
 - FIX : Compat 21  *06/01/2025* - 1.3.2
 - FIX : DA024855 Change req SQL "Liste Réf./libellé par tiers"  *15/05/2024* - 1.3.1
 - NEW : Add search field for custom ref in customer documents *14/09/2022* - 1.3.0
