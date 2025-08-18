@@ -482,7 +482,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 	 */
 	public function replaceThirdparty($parameters, &$object, &$action, $hookmanager)
 	{
-		$tables = ['advkanban'];
+		$tables = ['product_by_company'];
 
 		return CommonObject::commonReplaceThirdparty($this->db, $parameters['soc_origin'], $parameters['soc_dest'], $tables);
 	}
