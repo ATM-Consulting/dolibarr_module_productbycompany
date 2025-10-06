@@ -102,7 +102,7 @@ if ($object->isextrafieldmanaged)
  * Actions
  */
 
-$parameters = array('origin_id' => $origin_id, 'ref' => $ref, 'productbycompany' => $object);
+$parameters = array('origin_id' => $origin_id, 'ref' => $ref ?? '', 'productbycompany' => $object);
 $reshook = $hookmanager->executeHooks('doActions', $parameters, $origin_object, $action); // Note that $action and $origin_object may have been modified by some
 if ($reshook < 0) setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
 
@@ -330,8 +330,8 @@ else
             //$morehtmlref='<div class="refidno">';
             /*
             // Ref bis
-            $morehtmlref.=$form->editfieldkey("RefBis", 'ref_client', $origin_object->ref_client, $origin_object, $user->rights->productbycompany->write, 'string', '', 0, 1);
-            $morehtmlref.=$form->editfieldval("RefBis", 'ref_client', $origin_object->ref_client, $origin_object, $user->rights->productbycompany->write, 'string', '', null, null, '', 1);
+            $morehtmlref.=$form->editfieldkey("RefBis", 'ref_client', $origin_object->ref_client, $origin_object, $user->hasRight("productbycompany", "write"), 'string', '', 0, 1);
+            $morehtmlref.=$form->editfieldval("RefBis", 'ref_client', $origin_object->ref_client, $origin_object, $user->hasRight("productbycompany", "write"), 'string', '', null, null, '', 1);
             // Thirdparty
             $morehtmlref.='<br>'.$langs->trans('ThirdParty') . ' : ' . $soc->getNomUrl(1);
             */
