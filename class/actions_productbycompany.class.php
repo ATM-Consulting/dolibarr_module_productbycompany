@@ -78,7 +78,8 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
             $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
             if (!empty($search_companyproductreference)) {
                 $hookmanager->resPrint = " AND EXISTS (SELECT 1 FROM ".MAIN_DB_PREFIX."product_by_company AS pbc WHERE pbc.fk_product = p.rowid AND pbc.ref LIKE CONCAT('%', '".$search_companyproductreference."', '%')) ";
-            }
+                $this->resprints = $hookmanager->resPrint;
+			}
         }
         return 0;
     }
