@@ -113,7 +113,6 @@ class InterfaceProductByCompanytrigger
 		// Data and type of action are stored into $object and $action
 		// Users
 
-		// COMPATIBILITÉ V16
 		$update = '_MODIFY';
 		if ($action == 'LINEORDER_INSERT' || $action == 'LINEORDER_CREATE') {
 			dol_syslog(
