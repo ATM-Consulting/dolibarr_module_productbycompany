@@ -35,174 +35,147 @@
 class InterfaceProductByCompanytrigger
 {
 
-    private $db;
-
-    /**
-     * Constructor
-     *
-     * 	@param		DoliDB		$db		Database handler
-     */
-    public function __construct($db)
-    {
-        $this->db = $db;
-
-        $this->name = preg_replace('/^Interface/i', '', get_class($this));
-        $this->family = "demo";
-        $this->description = "Triggers of this module are empty functions."
-            . "They have no effect."
-            . "They are provided for tutorial purpose only.";
-        // 'development', 'experimental', 'dolibarr' or version
-        $this->version = 'development';
-        $this->picto = 'productbycompany@productbycompany';
-    }
-
-    /**
-     * Trigger name
-     *
-     * 	@return		string	Name of trigger file
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Trigger description
-     *
-     * 	@return		string	Description of trigger file
-     */
-    public function getDesc()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Trigger version
-     *
-     * 	@return		string	Version of trigger file
-     */
-    public function getVersion()
-    {
-        global $langs;
-        $langs->load("admin");
-
-        if ($this->version == 'development') {
-            return $langs->trans("Development");
-        } elseif ($this->version == 'experimental')
-
-                return $langs->trans("Experimental");
-        elseif ($this->version == 'dolibarr') return DOL_VERSION;
-        elseif ($this->version) return $this->version;
-        else {
-            return $langs->trans("Unknown");
-        }
-    }
-
+	private $db;
 
 	/**
-	 * Function called when a Dolibarrr business event is done.
-	 * All functions "run_trigger" are triggered if file is inside directory htdocs/core/triggers
+	 * Constructor
 	 *
-	 * @param string $action code
-	 * @param Object $object
-	 * @param User $user user
-	 * @param Translate $langs langs
-	 * @param conf $conf conf
-	 * @return int <0 if KO, 0 if no triggered ran, >0 if OK
+	 * 	@param		DoliDB		$db		Database handler
 	 */
-	function runTrigger($action, $object, $user, $langs, $conf) {
-		//For 8.0 remove warning
-		$result=$this->run_trigger($action, $object, $user, $langs, $conf);
-		return $result;
+	public function __construct($db)
+	{
+		$this->db = $db;
+
+		$this->name = preg_replace('/^Interface/i', '', get_class($this));
+		$this->family = "demo";
+		$this->description = "Triggers of this module are empty functions. They have no effect. They are provided for tutorial purpose only.";
+		// 'development', 'experimental', 'dolibarr' or version
+		$this->version = 'development';
+		$this->picto = 'productbycompany@productbycompany.png';
 	}
 
+	/**
+	 * Trigger name
+	 *
+	 * 	@return		string	Name of trigger file
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
 
-    /**
-     * Function called when a Dolibarrr business event is done.
-     * All functions "run_trigger" are triggered if file
-     * is inside directory core/triggers
-     *
-     * 	@param		string		$action		Event action code
-     * 	@param		Object		$object		Object
-     * 	@param		User		$user		Object user
-     * 	@param		Translate	$langs		Object langs
-     * 	@param		conf		$conf		Object conf
-     * 	@return		int						<0 if KO, 0 if no triggered ran, >0 if OK
-     */
-    public function run_trigger($action, $object, $user, $langs, $conf)
-    {
-        // Put here code you want to execute when a Dolibarr business events occurs.
-        // Data and type of action are stored into $object and $action
-        // Users
+	/**
+	 * Trigger description
+	 *
+	 * 	@return		string	Description of trigger file
+	 */
+	public function getDesc()
+	{
+		return $this->description;
+	}
 
-	#COMPATIBILITÉ V16
-	$update = '_MODIFY';
-	if (intval(DOL_VERSION) < 16) $update = '_UPDATE';
+	/**
+	 * Trigger version
+	 *
+	 * 	@return		string	Version of trigger file
+	 */
+	public function getVersion()
+	{
+		global $langs;
+		$langs->load("admin");
 
-        if ($action == 'LINEORDER_INSERT' || $action == 'LINEORDER_CREATE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->createCustomRef($object);
-        } elseif ($action == 'LINEORDER'.$update) {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->createCustomRef($object, 'edit');
-        } elseif ($action == 'LINEORDER_DELETE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-			return $this->deleteCustomRef($object);
-        } elseif ($action == 'LINEORDER_SUPPLIER_CREATE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->createCustomRef($object);
-        } elseif ($action == 'LINEORDER_SUPPLIER'.$update) {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->createCustomRef($object, 'edit');
-        } elseif ($action == 'LINEORDER_SUPPLIER_DELETE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->deleteCustomRef($object);
-        }
-		elseif ($action == 'LINEPROPAL_INSERT' || $action == 'LINEPROPAL_CREATE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
+		if ($this->version == 'development') {
+			return $langs->trans("Development");
+		} elseif ($this->version == 'experimental')
+
+				return $langs->trans("Experimental");
+		elseif ($this->version == 'dolibarr') return DOL_VERSION;
+		elseif ($this->version) return $this->version;
+		else {
+			return $langs->trans("Unknown");
+		}
+	}
+	/**
+	 * Function called when a Dolibarrr business event is done.
+	 * All functions "run_trigger" are triggered if file
+	 * is inside directory core/triggers
+	 *
+	 * 	@param		string		$action		Event action code
+	 * 	@param		Object		$object		Object
+	 * 	@param		User		$user		Object user
+	 * 	@param		Translate	$langs		Object langs
+	 * 	@param		conf		$conf		Object conf
+	 * 	@return		int						<0 if KO, 0 if no triggered ran, >0 if OK
+	 */
+	public function runTrigger($action, $object, $user, $langs, $conf)
+	{
+		// Put here code you want to execute when a Dolibarr business events occurs.
+		// Data and type of action are stored into $object and $action
+		// Users
+
+		// COMPATIBILITÉ V16
+		$update = '_MODIFY';
+		if ($action == 'LINEORDER_INSERT' || $action == 'LINEORDER_CREATE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
 			return $this->createCustomRef($object);
-        } elseif ($action == 'LINEPROPAL'.$update) {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
+		} elseif ($action == 'LINEORDER'.$update) {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
 			return $this->createCustomRef($object, 'edit');
-        } elseif ($action == 'LINEPROPAL_DELETE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
+		} elseif ($action == 'LINEORDER_DELETE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
 			return $this->deleteCustomRef($object);
-        }
-		elseif ($action == 'LINEBILL_INSERT' || $action == 'LINEBILL_CREATE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
+		} elseif ($action == 'LINEORDER_SUPPLIER_CREATE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
 			return $this->createCustomRef($object);
-        } elseif ($action == 'LINEBILL'.$update) {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
+		} elseif ($action == 'LINEORDER_SUPPLIER'.$update) {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
 			return $this->createCustomRef($object, 'edit');
-        } elseif ($action == 'LINEBILL_DELETE') {
-            dol_syslog(
-                "Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
-            );
-            return $this->deleteCustomRef($object);
-        }
-        elseif ($action == 'LINEBILL_SUPPLIER_CREATE') {
+		} elseif ($action == 'LINEORDER_SUPPLIER_DELETE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->deleteCustomRef($object);
+		} elseif ($action == 'LINEPROPAL_INSERT' || $action == 'LINEPROPAL_CREATE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->createCustomRef($object);
+		} elseif ($action == 'LINEPROPAL'.$update) {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->createCustomRef($object, 'edit');
+		} elseif ($action == 'LINEPROPAL_DELETE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->deleteCustomRef($object);
+		} elseif ($action == 'LINEBILL_INSERT' || $action == 'LINEBILL_CREATE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->createCustomRef($object);
+		} elseif ($action == 'LINEBILL'.$update) {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->createCustomRef($object, 'edit');
+		} elseif ($action == 'LINEBILL_DELETE') {
+			dol_syslog(
+				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
+			);
+			return $this->deleteCustomRef($object);
+		} elseif ($action == 'LINEBILL_SUPPLIER_CREATE') {
 			dol_syslog(
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
@@ -217,8 +190,7 @@ class InterfaceProductByCompanytrigger
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
 			return $this->deleteCustomRef($object);
-		}
-        elseif ($action == 'LINESUPPLIER_PROPOSAL_INSERT' || $action == 'LINESUPPLIER_PROPOSAL_CREATE') {
+		} elseif ($action == 'LINESUPPLIER_PROPOSAL_INSERT' || $action == 'LINESUPPLIER_PROPOSAL_CREATE') {
 			dol_syslog(
 				"Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id
 			);
@@ -235,10 +207,16 @@ class InterfaceProductByCompanytrigger
 			return $this->deleteCustomRef($object);
 		}
 
-        return 0;
-    }
-
-    public function createCustomRef(&$object, $mode = 'create')
+		return 0;
+	}
+	/**
+	 * Create or update custom reference
+	 *
+	 * @param   CommonObject    $object     Object line
+	 * @param   string          $mode       Mode ('create' or 'edit')
+	 * @return  int                         0
+	 */
+	public function createCustomRef(&$object, $mode = 'create')
 	{
 		global $langs, $db, $user;
 		$langs->load('productbycompany@productbycompany');
@@ -250,20 +228,17 @@ class InterfaceProductByCompanytrigger
 		$customRowid	= GETPOST('customRowid');
 		$customDetRowid = GETPOST('customDetRowid');
 
-		if (!empty($object->origin))
-		{
+		if (!empty($object->origin)) {
 			dol_include_once('/productbycompany/class/productbycompany.class.php');
 			$previousElement = new ProductByCompanyDet($db);
 			$previousElement->fk_origin = $object->origin_id;
 			// the ."det" is needed to append to origin as the origin of a line shows only the main object and not the line object with det
-			if ($object->origin == "order_supplier")
-			{
+			if ($object->origin == "order_supplier") {
 				$object->origin = "commande_fournisseur";
 			}
 			$previousElement->origin_type = $object->origin."det";
 			$exists = $previousElement->alreadyExists();
-			if ($exists > 0)
-			{
+			if ($exists > 0) {
 				$previousElement->fetch($exists);
 			}
 
@@ -274,8 +249,7 @@ class InterfaceProductByCompanytrigger
 
 		// récupération du fk_soc
 		$parentTable = '';
-		switch ($object->element)
-		{
+		switch ($object->element) {
 			case 'commandedet':
 				$parentTable = 'commande';
 				$fk="fk_".$parentTable;
@@ -309,8 +283,7 @@ class InterfaceProductByCompanytrigger
 		$sql = "SELECT fk_soc FROM ".MAIN_DB_PREFIX.$parentTable;
 		$sql.= " WHERE rowid = ".$object->{$fk};
 		$resql = $db->query($sql);
-		if ($resql)
-		{
+		if ($resql) {
 			$obj = $db->fetch_object($resql);
 			$fk_soc = $obj->fk_soc;
 		}
@@ -320,9 +293,9 @@ class InterfaceProductByCompanytrigger
 		$pbc_det 		= new ProductByCompanyDet($db);
 
 		//Dans le cas où l'on converti un objet en un autre (ex : propal vers commande)
-		if(empty($selected) && empty($customRef) && empty($customLabel) && !empty($object->origin) && !empty($object->origin_id)) {
+		if (empty($selected) && empty($customRef) && empty($customLabel) && !empty($object->origin) && !empty($object->origin_id)) {
 			$res = $pbc_det->getOriginData($object->origin, $object->origin_id);
-			if($res > 0 && !empty($pbc_det->ref)) {
+			if ($res > 0 && !empty($pbc_det->ref)) {
 				$pbc_det->id = 0;
 				$customRef = $pbc_det->ref;
 				$customLabel = $pbc_det->label;
@@ -338,22 +311,16 @@ class InterfaceProductByCompanytrigger
 			,'fk_origin' 	=> $object->id
 			,'origin_type' 	=> $object->element
 		);
-		if (empty($selected))
-		{
-			if ($mode == "edit")
-			{
+		if (empty($selected)) {
+			if ($mode == "edit") {
 				$pbc_det->setValues($data);
 				$pbc_det->id = $pbc_det->alreadyExists();
-				if ($pbc_det->id > 0)
-				{
+				if ($pbc_det->id > 0) {
 					$pbc_det->delete($user);
 				}
 			}
-		}
-		else
-		{
-			if ($majCustomRef)
-			{
+		} else {
+			if ($majCustomRef) {
 				$parent_pbc->setValues($data);
 				$parent_pbc->id = $parent_pbc->alreadyExists();
 				$parent_pbc->save($user);
@@ -364,7 +331,7 @@ class InterfaceProductByCompanytrigger
 			$pbc_det->save($user);
 		}
 
-/*		var_dump(
+		/*      var_dump(
 			array(
 				'selected' => $selected,
 				'customRowid' => $customRowid,
@@ -377,9 +344,13 @@ class InterfaceProductByCompanytrigger
 		exit;*/
 
 		return 0;
-
 	}
-
+	/**
+	 * Delete custom reference
+	 *
+	 * @param   CommonObject    $object     Object line
+	 * @return  void
+	 */
 	public function deleteCustomRef(&$object)
 	{
 		global $db, $user;
