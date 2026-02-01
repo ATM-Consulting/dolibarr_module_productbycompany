@@ -16,6 +16,7 @@ ParamHelp=Le contenu de l'aide
 PBC_DONT_PRESELECT_CUSTOM_REF=Ne pas présélectionner par défaut la référence personnalisé
 PBC_USE_CUSTOM_REF_CUSTOMER=Utiliser les références personnalisées sur les documents clients
 PBC_USE_CUSTOM_REF_SUPPLIER=Utiliser les références personnalisées sur les documents fournisseurs
+PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST=Utilisez des références personnalisées pour afficher et rechercher sur la page des listes de produits
 
 # TAB
 TabProductByCompanyFromProduct=Réf./libellé par client
@@ -56,3 +57,6 @@ RefIsAMandatoryField=Le champs Ref ne peut être vide
 Customize=Personnaliser
 
 SearchForCustomerCustomRef = Réf produit du client
+
+# product list
+ProductRefByCompany = Référence du produit du tiers

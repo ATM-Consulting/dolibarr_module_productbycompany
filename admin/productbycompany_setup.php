@@ -114,6 +114,8 @@ setup_print_on_off('PBC_USE_CUSTOM_REF_SUPPLIER'); // Utiliser les références 
 
 setup_print_on_off('PBC_DONT_PRESELECT_CUSTOM_REF'); // Ne pas présélectionner par défaut la référence personnalisé
 
+setup_print_on_off('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST');
+
 // Example with imput
 //setup_print_input_form_part('CONSTNAME', $langs->trans('ParamLabel'));
 

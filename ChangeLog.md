@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-
+- NEW : Add references in product list and add corresponding search functionality *28/06/2024*
 
 ## Release 1.3
 - FIX : Compat v23 - *20/01/2026* - 1.3.4
