@@ -103,6 +103,7 @@ class modProductByCompany extends DolibarrModules
 				,'ordersuppliercard'
 				,'invoicesuppliercard'
 				,'supplier_proposalcard'
+				,'productservicelist'
 			),
 			'triggers' => 1,
 			'css' => array(
