@@ -74,10 +74,12 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListWhere($parameters, &$object, &$action, $hookmanager)
     {
-        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
-            $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
+		global $db;
+		
+        if (in_array('productservicelist', explode(':', $parameters['context'])) && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
+            $search_companyproductreference = GETPOST("search_companyproductreference", 'alphanohtml');
             if (!empty($search_companyproductreference)) {
-                $hookmanager->resPrint = " AND EXISTS (SELECT 1 FROM ".MAIN_DB_PREFIX."product_by_company AS pbc WHERE pbc.fk_product = p.rowid AND pbc.ref LIKE CONCAT('%', '".$search_companyproductreference."', '%')) ";
+                $hookmanager->resPrint = " AND EXISTS (SELECT 1 FROM ".$db->prefix()."product_by_company AS pbc WHERE pbc.fk_product = p.rowid AND pbc.ref LIKE CONCAT('%', '".$search_companyproductreference."', '%')) ";
                 $this->resprints = $hookmanager->resPrint;
 			}
         }
@@ -86,8 +88,8 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
     
     public function printFieldListOption($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
-            $search_companyproductreference = GETPOST("search_companyproductreference", 'alpha');
+        if (in_array('productservicelist', explode(':', $parameters['context'])) && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
+            $search_companyproductreference = GETPOST("search_companyproductreference", 'alphanohtml');
 
             print '<td class="liste_titre left">';
             print '<input class="flat" type="text" name="search_companyproductreference" size="12" value="'.dol_escape_htmltag($search_companyproductreference).'">';
@@ -98,7 +100,7 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListTitle($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
+        if (in_array('productservicelist', explode(':', $parameters['context'])) && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             global $langs;
 
             $langs->load('productbycompany@productbycompany');
@@ -114,12 +116,14 @@ class ActionsProductByCompany extends \productbycompany\RetroCompatCommonHookAct
 
     public function printFieldListValue($parameters, &$object, &$action, $hookmanager)
 	{
-        if ($parameters['currentcontext'] == 'productservicelist' && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
+		global $db;
+		
+        if in_array('productservicelist', explode(':', $parameters['context'])) && getDolGlobalString('PBC_USE_CUSTOM_REF_SEARCH_ON_PRODUCTLIST')) {
             $product = $parameters["obj"];
 
             print '<td class="center nowraponall">';
 
-            $sql = "SELECT ref FROM ".MAIN_DB_PREFIX."product_by_company WHERE fk_product = '".$product->rowid."'";
+            $sql = "SELECT ref FROM ".$db->prefix()."product_by_company WHERE fk_product = '".$product->rowid."'";
             $resql = $this->db->query($sql);
             if ($resql) {
                 $num = $this->db->num_rows($resql);
